@@ -1,0 +1,26 @@
+{% if request.user.is_authenticated %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<h1>Lista de Moradores</h1>
+<input type="submit" onclick="location.href = '{% url 'morador:create' %}'" value="Criar novo Cadastro">
+<ul>
+    {% for morador in object_list %}
+    <li>{{ morador.nome }} - <a href="{% url 'morador:update' pk=morador.id %}">Editar</a> -
+        <a href="{% url 'morador:detail' pk=morador.id %}">Visualizar</a> -
+        <a href="{% url 'morador:delete' pk=morador.id %}">Excluir</a> -
+    </li>
+    {% endfor %}
+</ul> 
+    
+</body>
+</html>
+{% else %}
+    Você não tem acesso a essa área! Seu Liso!
+{% endif %}
